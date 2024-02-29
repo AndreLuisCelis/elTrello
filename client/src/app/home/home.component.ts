@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit, OnDestroy {
 
-  isLoggedSubscrpition: Subscription = new Subscription;
+  subscrpitions: Subscription = new Subscription;
 
   constructor(
     private authService: AuthService,
@@ -18,11 +18,11 @@ export class HomeComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    this.isLoggedSubscrpition.add(
+    this.subscrpitions.add(
       this.authService.isLogged$.subscribe(
         (isLoggedIn) => {
           if (isLoggedIn) {
-            this.router.navigateByUrl('/register')
+            this.router.navigateByUrl('/boards')
           }
         }
       )
@@ -30,6 +30,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void{
-    this.isLoggedSubscrpition.unsubscribe();
+    this.subscrpitions.unsubscribe();
   }
 }
